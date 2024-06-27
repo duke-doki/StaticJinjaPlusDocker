@@ -14,7 +14,11 @@ docker login
 ## How to run
 
 You need to have `templates` directory where you run the script. 
-Otherwise [these]() templates will be used. 
+Otherwise [these]() templates will be used.
+Check that your user is included in docker group, if not, run:
+```shell
+sudo usermod -aG docker <username>
+```
 
 Run:
 ```shell

@@ -27,24 +27,24 @@ else
     TAG="${VERSION}-${BASE_IMAGE}"
 fi
 
-docker build --build-arg VERSION=${VERSION} -t static-jinja-plus:${TAG} -f ${DOCKERFILE} .
+docker build --build-arg VERSION="${VERSION}" -t "static-jinja-plus:${TAG}" -f "${DOCKERFILE}" .
 
-docker rm -f static-jinja-plus_container
+docker rm -f static-jinja-plus_container_temp
 
 docker run -d --name static-jinja-plus_container_temp \
-    static-jinja-plus:${TAG}
+    "static-jinja-plus:${TAG}"
 
-if [ ! -d "$(pwd)/templates" ] || [ -z "$(ls -A $(pwd)/templates)" ]; then
-    docker cp static-jinja-plus_container_temp:/opt/StaticJinjaPlus/templates $(pwd)/templates
+if [ ! -d "$(pwd)/templates" ] || [ -z "$(ls -A "$(pwd)/templates")" ]; then
+    docker cp static-jinja-plus_container_temp:/opt/StaticJinjaPlus/templates "$(pwd)/templates"
 fi
 
-if [ ! -d "$(pwd)/build" ] || [ -z "$(ls -A $(pwd)/build)" ]; then
-    docker cp static-jinja-plus_container_temp:/opt/StaticJinjaPlus/build $(pwd)/build
+if [ ! -d "$(pwd)/build" ] || [ -z "$(ls -A "$(pwd)/build")" ]; then
+    docker cp static-jinja-plus_container_temp:/opt/StaticJinjaPlus/build "$(pwd)/build"
 fi
 
 docker rm -f static-jinja-plus_container_temp
 
 docker run -d --name static-jinja-plus_container \
-    -v $(pwd)/templates:/opt/StaticJinjaPlus/templates \
-    -v $(pwd)/build:/opt/StaticJinjaPlus/build \
-    static-jinja-plus:${TAG}
+    -v "$(pwd)/templates:/opt/StaticJinjaPlus/templates" \
+    -v "$(pwd)/build:/opt/StaticJinjaPlus/build" \
+    "static-jinja-plus:${TAG}"
