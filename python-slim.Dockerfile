@@ -3,7 +3,8 @@ FROM python:3.12-slim
 ARG VERSION=main
 
 RUN apt-get update && \
-    apt-get install -y git
+    apt-get install -y git && \
+    rm -rf /var/lib/apt/lists/*
 
 WORKDIR /opt
 
