@@ -3,10 +3,16 @@ FROM python:3.12-slim
 ARG VERSION=main
 
 RUN apt-get update && \
-    apt-get install -y git && \
+    apt-get install -y git unzip && \
     rm -rf /var/lib/apt/lists/*
 
-RUN git clone --branch ${VERSION} https://github.com/MrDave/StaticJinjaPlus.git /opt/StaticJinjaPlus
+COPY StaticJinjaPlus-${VERSION}.zip /opt/StaticJinjaPlus.zip
+
+WORKDIR /opt
+
+RUN unzip StaticJinjaPlus.zip -d /opt && \
+    mv /opt/StaticJinjaPlus-${VERSION} /opt/StaticJinjaPlus && \
+    rm StaticJinjaPlus.zip
 
 WORKDIR /opt/StaticJinjaPlus
 

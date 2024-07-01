@@ -29,8 +29,6 @@ fi
 
 docker build --build-arg VERSION="${VERSION}" -t "static-jinja-plus:${TAG}" -f "${DOCKERFILE}" .
 
-docker rm -f static-jinja-plus_container_temp
-
 docker run -d --name static-jinja-plus_container_temp \
     "static-jinja-plus:${TAG}"
 
