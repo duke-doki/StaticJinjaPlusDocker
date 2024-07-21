@@ -3,6 +3,7 @@
 VERSION="main"
 BASE_IMAGE="ubuntu"
 CHECKSUM="9adccb8fe17a40252df1a3acdea7edef4633b4ecaa8ba2dd5e0270f87ae43eab"
+TAGS="tags"
 
 while [[ "$#" -gt 0 ]]; do
     case $1 in
@@ -24,8 +25,10 @@ fi
 
 if [ "$VERSION" == "main" ]; then
     TAG="latest-${BASE_IMAGE}"
+    TAGS="heads"
 else
     TAG="${VERSION}-${BASE_IMAGE}"
+    TAGS="tags"
 fi
 
 if [ "$VERSION" == "main" ]; then
@@ -36,7 +39,7 @@ elif [ "$VERSION" == "0.1.0" ]; then
     CHECKSUM="3555bcfd670e134e8360ad934cb5bad1bbe2a7dad24ba7cafa0a3bb8b23c6444"
 fi
 
-docker build --build-arg VERSION="${VERSION}" --build-arg CHECKSUM="${CHECKSUM}" -t "static-jinja-plus:${TAG}" -f "${DOCKERFILE}" .
+docker build --build-arg VERSION="${VERSION}" --build-arg CHECKSUM="${CHECKSUM}" --build-arg TAGS="${TAGS}" -t "static-jinja-plus:${TAG}" -f "${DOCKERFILE}" .
 
 docker run -d --name static-jinja-plus_container_temp \
     "static-jinja-plus:${TAG}"
