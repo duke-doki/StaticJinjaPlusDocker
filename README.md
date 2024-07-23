@@ -27,8 +27,34 @@ Run:
 
 Where `base-image` is either ubuntu or python-slim and `version` is either main (latest) or one presented in original project's tags.
 
+There are 2 base images available:
+
+- ubuntu
+- python-slim
+
+And 3 versions available:
+
+- main
+- 0.1.0
+- 0.1.1
+
+### Example
+
+```shell
+./render.sh -base-image python-slim -version 0.1.0
+```
+
+*By default the base image is `ubuntu` and version is `main`.
+
 ## How to stop
+
 Run:
 ```shell
 docker stop static-jinja-plus_container
+```
+
+And delete:
+```shell
+docker rm static-jinja-plus_container
+docker rmi static-jinja-plus_container:<tag>
 ```
