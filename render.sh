@@ -15,9 +15,9 @@ while [[ "$#" -gt 0 ]]; do
 done
 
 if [ "$BASE_IMAGE" == "ubuntu" ]; then
-    DOCKERFILE="ubuntu.Dockerfile"
+    DOCKERFILE="./ubuntu/Dockerfile"
 elif [ "$BASE_IMAGE" == "python-slim" ]; then
-    DOCKERFILE="python-slim.Dockerfile"
+    DOCKERFILE="./python-slim/Dockerfile"
 else
     echo "Unsupported base image: $BASE_IMAGE"
     exit 1
