@@ -4,7 +4,7 @@ ARG VERSION=main
 
 ARG CHECKSUM=9adccb8fe17a40252df1a3acdea7edef4633b4ecaa8ba2dd5e0270f87ae43eab
 
-ARG TAGS=tags
+ARG TAGS=heads
 
 ADD --checksum=sha256:${CHECKSUM} https://github.com/MrDave/StaticJinjaPlus/archive/refs/${TAGS}/${VERSION}.tar.gz /opt/StaticJinjaPlus.tar.gz
 
