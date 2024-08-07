@@ -1,12 +1,10 @@
 FROM python:3.12-slim
 
-ARG VERSION=main
+ARG VERSION=0.1.0
 
-ARG CHECKSUM=9adccb8fe17a40252df1a3acdea7edef4633b4ecaa8ba2dd5e0270f87ae43eab
+ARG CHECKSUM=3555bcfd670e134e8360ad934cb5bad1bbe2a7dad24ba7cafa0a3bb8b23c6444
 
-ARG TAGS=heads
-
-ADD --checksum=sha256:${CHECKSUM} https://github.com/MrDave/StaticJinjaPlus/archive/refs/${TAGS}/${VERSION}.tar.gz /opt/StaticJinjaPlus.tar.gz
+ADD --checksum=sha256:${CHECKSUM} https://github.com/MrDave/StaticJinjaPlus/archive/refs/tags/${VERSION}.tar.gz /opt/StaticJinjaPlus.tar.gz
 
 WORKDIR /opt
 
