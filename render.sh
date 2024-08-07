@@ -13,9 +13,9 @@ while [[ "$#" -gt 0 ]]; do
 done
 
 if [ "$BASE_IMAGE" == "ubuntu" ]; then
-    DIR="./ubuntu"
+    DIR="ubuntu"
 elif [ "$BASE_IMAGE" == "python-slim" ]; then
-    DIR="./python-slim"
+    DIR="python-slim"
 else
     echo "Unsupported base image: $BASE_IMAGE"
     exit 1
