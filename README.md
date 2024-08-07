@@ -13,6 +13,12 @@ docker login
 
 ## How to run
 
+```shell
+docker build -t <tag> -f <image>/<version>/Dockerfile .
+```
+
+### Run with a script
+
 You need to have `templates` directory where you run the script. 
 Otherwise [these]() templates will be used.
 Check that your user is included in docker group, if not, run:
@@ -44,7 +50,7 @@ And 3 versions available:
 ./render.sh -base-image python-slim -version 0.1.0
 ```
 
-*By default the base image is `ubuntu` and version is `main`.
+*By default, the base image is `ubuntu` and version is `main`.
 
 ## How to stop
 
