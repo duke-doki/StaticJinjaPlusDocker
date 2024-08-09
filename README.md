@@ -64,3 +64,40 @@ And delete:
 docker rm static-jinja-plus_container
 docker rmi static-jinja-plus_container:<tag>
 ```
+
+## How to upload tags to docker hub
+
+1. find your images' IDs
+
+```shell
+duke_duke@Duke-Duke:~$ docker images
+REPOSITORY                    TAG             IMAGE ID       CREATED          SIZE
+static-jinja-plus             0.1.0-python    7bb03fbb27f8   7 minutes ago    145MB
+static-jinja-plus             latest-ubuntu   0d51b7d4af19   8 minutes ago    525MB
+static-jinja-plus             latest-python   3fadc9b366ac   19 minutes ago   142MB
+static-jinja-plus             0.1.1-python    1dbc88034fe0   29 hours ago     142MB
+static-jinja-plus             0.1.0-ubuntu    49cbd425c788   2 weeks ago      522MB
+static-jinja-plus             0.1.1-ubuntu    e5a2436ec376   3 weeks ago      519MB
+```
+
+2. Tag them with your docker username
+
+```shell
+docker tag 7bb03fbb27f8 <username>/static-jinja-plus:0.1.0-python
+docker tag 0d51b7d4af19 <username>/static-jinja-plus:latest-ubuntu
+docker tag 3fadc9b366ac <username>/static-jinja-plus:latest-python
+docker tag 1dbc88034fe0 <username>/static-jinja-plus:0.1.1-python
+docker tag 49cbd425c788 <username>/static-jinja-plus:0.1.0-ubuntu
+docker tag e5a2436ec376 <username>/static-jinja-plus:0.1.1-ubuntu
+```
+
+3. Push
+
+```shell
+docker push <username>/static-jinja-plus:0.1.0-python
+docker push <username>/static-jinja-plus:latest-ubuntu
+docker push <username>/static-jinja-plus:latest-python
+docker push <username>/static-jinja-plus:0.1.1-python
+docker push <username>/static-jinja-plus:0.1.0-ubuntu
+docker push <username>/static-jinja-plus:0.1.1-ubuntu
+```
