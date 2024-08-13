@@ -2,102 +2,99 @@
 
 ## Description
 
-Docker images based on original project from [here](https://github.com/MrDave/StaticJinjaPlus).
+This repository provides Docker image based on the original project from [here](https://github.com/MrDave/StaticJinjaPlus).
 
-## How to install
+Example of Docker Hub repository - [here](https://hub.docker.com/repository/docker/dukedoki/static-jinja-plus/general).
 
-Download [docker](https://docs.docker.com/engine/install/) and log in to Docker Hub: 
-```shell
-docker login
-```
+## Important Note
 
-## How to run
+**<span style="color: red;">Do not attempt to manually build or run the Docker container.</span>** Use the `render.sh` script for all operations. Manual operations may not work as expected and could lead to issues.
 
-```shell
-docker build -t <tag> -f <image>/<version>/Dockerfile .
-```
+## Prerequisites
 
-### Run with a script
+1. **Install Docker**: Follow the installation guide [here](https://docs.docker.com/engine/install/).
+2. **Docker Group (Optional)**: If you encounter permission issues, you may need to add your user to the Docker group:
+    ```shell
+    sudo usermod -aG docker <username>
+    ```
 
-You need to have `templates` directory where you run the script. 
-Otherwise [these]() templates will be used.
-Check that your user is included in docker group, if not, run:
-```shell
-sudo usermod -aG docker <username>
-```
+## Using the `render.sh` Script
 
-Run:
-```shell
-./render.sh -base-image <image> -version <version>
-```
+The `render.sh` script handles both building and running the Docker container. It automatically takes care of the correct version, base image, and optional arguments.
 
-Where `base-image` is either ubuntu or python-slim and `version` is either main (latest) or one presented in original project's tags.
+### Script Usage
 
-There are 2 base images available:
+1. **Prepare the `templates` Directory**
 
-- ubuntu
-- python-slim
+   Ensure you have a `templates` directory in your current working directory. If it is missing, default templates will be used.
 
-And 3 versions available:
+2. **Run the Script**
 
-- main
-- 0.1.0
-- 0.1.1
+   Execute the `render.sh` script with the desired options:
+
+   ```shell
+   ./render.sh -base-image <image> -version <version> [-w]
+   ```
+   - `-base-image` can be either `ubuntu` or `python-slim`.
+   - `-version` can be `main` (latest) or any specific version from the project's tags.
+   - `-w` is an optional flag. Include it if you want to pass `-w` to the `python3` command inside the container.
 
 ### Example
 
+To build and run the container using the python-slim base image and version 0.1.0, including the -w flag:
+
 ```shell
-./render.sh -base-image python-slim -version 0.1.0
+./render.sh -base-image python-slim -version 0.1.0 -w
 ```
 
-*By default, the base image is `ubuntu` and version is `main`.
+## Stopping the Container
 
-## How to stop
+If you need to stop the running container, use the following command:
 
-Run:
 ```shell
-docker stop static-jinja-plus_container
+docker stop <container>
 ```
 
-And delete:
+To remove the container and its associated image, use:
+
 ```shell
-docker rm static-jinja-plus_container
-docker rmi static-jinja-plus_container:<tag>
+docker rm <container>
+docker rmi <image>:<tag>
 ```
 
-## How to upload tags to docker hub
 
-1. find your images' IDs
+## Uploading Images to Docker Hub
+
+If you need to upload images to Docker Hub, follow these steps:
+
+Find Your Images' IDs:
+
+```shell
+docker images
+```
+
+Tag the Images:
+
+```shell
+docker tag <image_id> <username>/static-jinja-plus:<tag>
+```
+
+Push the Images to Docker Hub:
+
+```shell
+docker push <username>/static-jinja-plus:<tag>
+```
+
+### Example
 
 ```shell
 duke_duke@Duke-Duke:~$ docker images
 REPOSITORY                    TAG             IMAGE ID       CREATED          SIZE
 static-jinja-plus             0.1.0-python    7bb03fbb27f8   7 minutes ago    145MB
-static-jinja-plus             latest-ubuntu   0d51b7d4af19   8 minutes ago    525MB
-static-jinja-plus             latest-python   3fadc9b366ac   19 minutes ago   142MB
-static-jinja-plus             0.1.1-python    1dbc88034fe0   29 hours ago     142MB
-static-jinja-plus             0.1.0-ubuntu    49cbd425c788   2 weeks ago      522MB
-static-jinja-plus             0.1.1-ubuntu    e5a2436ec376   3 weeks ago      519MB
+duke_duke@Duke-Duke:~$ docker tag 7bb03fbb27f8 dukedoki/static-jinja-plus:0.1.0-python
+duke_duke@Duke-Duke:~$ docker push dukedoki/static-jinja-plus:0.1.0-python
 ```
 
-2. Tag them with your docker username
+## Notes
 
-```shell
-docker tag 7bb03fbb27f8 <username>/static-jinja-plus:0.1.0-python
-docker tag 0d51b7d4af19 <username>/static-jinja-plus:latest-ubuntu
-docker tag 3fadc9b366ac <username>/static-jinja-plus:latest-python
-docker tag 1dbc88034fe0 <username>/static-jinja-plus:0.1.1-python
-docker tag 49cbd425c788 <username>/static-jinja-plus:0.1.0-ubuntu
-docker tag e5a2436ec376 <username>/static-jinja-plus:0.1.1-ubuntu
-```
-
-3. Push
-
-```shell
-docker push <username>/static-jinja-plus:0.1.0-python
-docker push <username>/static-jinja-plus:latest-ubuntu
-docker push <username>/static-jinja-plus:latest-python
-docker push <username>/static-jinja-plus:0.1.1-python
-docker push <username>/static-jinja-plus:0.1.0-ubuntu
-docker push <username>/static-jinja-plus:0.1.1-ubuntu
-```
+- Ensure you are logged in to Docker Hub before pushing images. Use `docker login` to authenticate.
