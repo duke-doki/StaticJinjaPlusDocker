@@ -8,7 +8,7 @@ Example of Docker Hub repository - [here](https://hub.docker.com/repository/dock
 
 ## Important Note
 
-**<span style="color: red;">Do not attempt to manually build or run the Docker container.</span>** Use the `render.sh` script for all operations. Manual operations may not work as expected and could lead to issues.
+⚠️ **Do not attempt to manually build or run the Docker container.** Use the `render.sh` script for all operations. Manual operations may not work as expected and could lead to issues.
 
 ## Prerequisites
 
