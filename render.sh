@@ -34,7 +34,7 @@ fi
 
 if [ "$BASE_IMAGE" == "ubuntu" ]; then
     DIR2="ubuntu"
-elif [ "$BASE_IMAGE" == "python" ]; then
+elif [ "$BASE_IMAGE" == "python-slim" ]; then
     DIR2="python"
 else
     echo "Unsupported base image: $BASE_IMAGE"

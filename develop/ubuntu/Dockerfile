@@ -21,4 +21,4 @@ WORKDIR /opt/StaticJinjaPlus
 RUN mv templates_example templates && \
     pip install -r requirements.txt --break-system-packages
 
-CMD ["python3", "main.py", "--srcpath", "/opt/StaticJinjaPlus/templates", "--outpath", "/opt/StaticJinjaPlus/build"]
+ENTRYPOINT ["python3", "main.py", "--srcpath", "/opt/StaticJinjaPlus/templates", "--outpath", "/opt/StaticJinjaPlus/build"]
