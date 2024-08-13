@@ -17,4 +17,4 @@ WORKDIR /opt/StaticJinjaPlus
 RUN mv templates_example templates && \
     pip install -r requirements.txt
 
-CMD ["python3", "main.py", "-w", "--srcpath", "/opt/StaticJinjaPlus/templates", "--outpath", "/opt/StaticJinjaPlus/build"]
+CMD ["python3", "main.py", "--srcpath", "/opt/StaticJinjaPlus/templates", "--outpath", "/opt/StaticJinjaPlus/build"]
