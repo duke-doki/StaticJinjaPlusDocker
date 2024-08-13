@@ -18,12 +18,19 @@ done
 
 
 if [ "$VERSION" == "main" ]; then
+    CHECKSUM="9adccb8fe17a40252df1a3acdea7edef4633b4ecaa8ba2dd5e0270f87ae43eab"
     TAG="latest-${BASE_IMAGE}"
     DIR1="develop"
-else
+elif [ "$VERSION" == "0.1.1" ]; then
+    CHECKSUM="30d9424df1eddb73912b0e2ad5375fa2c876c8e30906bec91952dfb75dcf220b"
+    TAG="${VERSION}-${BASE_IMAGE}"
+    DIR1="0.1"
+elif [ "$VERSION" == "0.1.0" ]; then
+    CHECKSUM="3555bcfd670e134e8360ad934cb5bad1bbe2a7dad24ba7cafa0a3bb8b23c6444"
     TAG="${VERSION}-${BASE_IMAGE}"
     DIR1="0.1"
 fi
+
 
 if [ "$BASE_IMAGE" == "ubuntu" ]; then
     DIR2="ubuntu"
@@ -32,15 +39,6 @@ elif [ "$BASE_IMAGE" == "python" ]; then
 else
     echo "Unsupported base image: $BASE_IMAGE"
     exit 1
-fi
-
-
-if [ "$VERSION" == "main" ]; then
-    CHECKSUM="9adccb8fe17a40252df1a3acdea7edef4633b4ecaa8ba2dd5e0270f87ae43eab"
-elif [ "$VERSION" == "0.1.1" ]; then
-    CHECKSUM="30d9424df1eddb73912b0e2ad5375fa2c876c8e30906bec91952dfb75dcf220b"
-elif [ "$VERSION" == "0.1.0" ]; then
-    CHECKSUM="3555bcfd670e134e8360ad934cb5bad1bbe2a7dad24ba7cafa0a3bb8b23c6444"
 fi
 
 
